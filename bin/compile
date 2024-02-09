@@ -25,7 +25,7 @@ echo "SWIG downloaded"
 
 
 echo "-----> Installing ..."
-tar xzf /tmp/swig.tar.gz -C /tmp
+tar xzf /tmp/swig-2.0.4.tar.gz -C /tmp
 
 cd /tmp
 
