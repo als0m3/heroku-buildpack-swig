@@ -20,7 +20,13 @@ cd $BUILD_DIR
 echo "-----> download swig 2.0"
 wget https://raw.githubusercontent.com/als0m3/heroku-buildpack-swig/main/swig-2.0.4.tar.gz > /tmp/swig.tar.gz
 
+echo "-----> Verifying signature"
+
+md5 /tmp/swig.tar.gz
+
 echo "SWIG downloaded"
+
+
 
 echo "-----> Installing ..."
 tar xzf /tmp/swig.tar.gz -C /tmp
