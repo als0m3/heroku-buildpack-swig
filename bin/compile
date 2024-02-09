@@ -12,31 +12,33 @@ CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 
-mkdir -p "$BUILD_DIR/.tmp/"
+mkdir -p "$BUILD_DIR/.jp_vendor/"
 
 cd $BUILD_DIR
 
 # Install SWIG
-echo "-----> download swig 2.0"
-wget -P /tmp/ https://raw.githubusercontent.com/als0m3/heroku-buildpack-swig/main/swig-2.0.4.tar.gz
+echo "-----> Fetching and installing SWIG 2"
+curl -L https://github.com/justforyou-br/heroku-buildpack-swig/raw/master/swig.tar.gz -o /tmp/swig.tar.gz
 
 echo "SWIG downloaded"
 
-
-
 echo "-----> Installing ..."
-tar xzf /tmp/swig-2.0.4.tar.gz -C /tmp
+tar xzf /tmp/swig.tar.gz -C /tmp
 
-cd /tmp/swig-2.0.4
+rm -rf "$BUILD_DIR/.jp_vendor/swig"
 
-./configure
+mv /tmp/swig "$BUILD_DIR/.jp_vendor"
 
-make
+export PATH="$BUILD_DIR/.jp_vendor/swig/bin":$PATH
+export SWIG_LIB="$BUILD_DIR/.jp_vendor/swig/share/swig/2.0.5"
 
-make install
+echo "export PATH=$PATH" > $BP_DIR/export
+echo "export SWIG_LIB=$SWIG_LIB" >> $BP_DIR/export
+echo 'export SWIG_FEATURES="-I/usr/include/openssl"' >> $BP_DIR/export
 
+cat $BP_DIR/export
 which swig
 
 echo "SWIG installed"
 
-# # End Install SWIG# # End Install SWIG
+# # End Install SWIG
