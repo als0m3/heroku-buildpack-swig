@@ -18,8 +18,8 @@ cd $BUILD_DIR
 
 # Install libzbar0
 echo "-----> Fetching and installing Libzbar0"
-sudo apt-get install libzbar0
-sudo apt-get install ffmpeg libsm6 libxext6  -y
+apt-get install libzbar0
+apt-get install ffmpeg libsm6 libxext6  -y
 
 
 # Install SWIG
