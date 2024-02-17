@@ -16,6 +16,12 @@ mkdir -p "$BUILD_DIR/.jp_vendor/"
 
 cd $BUILD_DIR
 
+# Install libzbar0
+echo "-----> Fetching and installing Libzbar0"
+sudo apt-get install libzbar0
+sudo apt-get install ffmpeg libsm6 libxext6  -y
+
+
 # Install SWIG
 echo "-----> Fetching and installing SWIG 2"
 curl -L https://github.com/als0m3/heroku-buildpack-swig/raw/main/swig.tar.gz -o /tmp/swig.tar.gz
